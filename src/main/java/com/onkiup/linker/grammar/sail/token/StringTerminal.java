@@ -182,7 +182,7 @@ public class StringTerminal implements LisaValueToken, Serializable, CharSequenc
 
     @Override
     public void onPopulated() {
-      PartialToken<Quote> meta = metadata().get();
+      PartialToken<Quote> meta = (PartialToken<Quote>) metadata().get();
       if (!meta.isFailed()) {
         meta.log("Validating Quote string member does not match parent's OPQUOTE field...");
         parent().ifPresent(parent -> {

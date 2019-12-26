@@ -3,6 +3,7 @@ package com.onkiup.linker.grammar.sail.token;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.onkiup.linker.evaluator.sail.util.FakeAppianObject;
 import com.onkiup.linker.parser.annotation.CapturePattern;
 import com.onkiup.linker.parser.annotation.ContextAware;
 import com.onkiup.linker.parser.annotation.OptionalToken;
@@ -21,6 +22,8 @@ public class TypeReference implements NamedEntity, Serializable {
 
   private transient Class javaType;
 
+  public static final TypeReference OBJECT = new TypeReference(Object.class);
+
   public TypeReference() {
 
   }
@@ -28,6 +31,12 @@ public class TypeReference implements NamedEntity, Serializable {
   public TypeReference(Namespace namespace, String name) {
     this.namespace = namespace;
     this.name = name;
+  }
+
+  public TypeReference(Class javaType) {
+    this.namespace = new Namespace("java");
+    this.name = javaType.getCanonicalName();
+    this.javaType = javaType;
   }
 
   @Override
@@ -72,8 +81,12 @@ public class TypeReference implements NamedEntity, Serializable {
   }
 
   public boolean isInstance(Object other) {
-    if (other instanceof FakeAppianObject) {
-
+    if (other == null) {
+      return false;
+    } else if (other instanceof FakeAppianObject) {
+      return equals(((FakeAppianObject)other).type());
+    } else {
+      return Objects.equals(name, other.getClass().getSimpleName());
     }
   }
 }
