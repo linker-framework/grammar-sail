@@ -27,7 +27,11 @@ public class NamedInvocationParameter implements InvocationParameter, Serializab
   private String COMMA;
 
   public NamedInvocationParameter() {
+    this(null, null, null);
+  }
 
+  public NamedInvocationParameter(String name, LisaValueToken parameter) {
+    this(name, null, parameter);
   }
 
   public NamedInvocationParameter(String name, CommentToken comment, LisaValueToken parameter) {

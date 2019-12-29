@@ -16,7 +16,7 @@ plugins {
 }
 
 project.group = 'com.onkiup'
-project.version = '0.1'
+project.version = '0.9'
 
 compileJava   {
     sourceCompatibility = '1.8'
@@ -36,6 +36,8 @@ dependencies {
     compile 'org.apache.commons:commons-math3:3.6.1'
     compile 'com.onkiup:linker-parser-api:0.9'
     compile 'com.onkiup:linker-parser:0.9'
+    compile 'com.onkiup:linker-utils:0.9'
+    compile 'org.yaml:snakeyaml:1.25'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:27.0.1-jre'
@@ -44,7 +46,7 @@ dependencies {
     compileOnly group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.28'
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    compile 'junit:junit:4.12'
 }
 
 task javadocJar(type: Jar) {

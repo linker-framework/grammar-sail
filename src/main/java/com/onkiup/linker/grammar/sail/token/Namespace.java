@@ -25,6 +25,7 @@ public class Namespace implements LisaToken, Serializable {
     namespace = value;
   }
 
+
   public String value() {
     return namespace;
   }
